@@ -1,0 +1,67 @@
+http://www.quuxlabs.com/blog/2010/09/location-and-friendship-data-mining-in-facebook/
+
+Location and Friendship: Data Mining in Facebook
+By Albert Au Yeung on September 5, 2010
+In the past, studying social issues such as the mobility of a group of people generally required a huge amount of effort. Questionnaires would have had to be prepared, distributed, and collected after they were filled in. It was and still is a labor-intensive task when face-to-face interviews are required to obtain various personal data.
+
+Nowadays, we have more and more people connected to the Internet, and many of these Internet users participate in various kinds of social interactions on the Web. Most notably, users enjoy social networking sites such as Facebook to establish their personal profile online and to keep track of what their friends are doing.
+
+As a result, huge volumes of data of social interactions can be collected much more easily nowadays. Analyzing this data can give insight into how different factors such as location, distance and friendship influence the way people interact with each other.
+
+
+Table of Contents:
+Location, Population and Friendship
+Facebook Data
+Population Density
+Friendship and Distance
+Location Prediction
+Summary
+References
+Comments (1)
+The currently largest online social networking site is Facebook. It claims to have a community of more than 500 million registered users, and it is ranked second in terms of Internet traffic. To serve this large number of users and to keep track of all the user activities, Facebook is said to have been running more than 60,000 servers.
+
+Facebook may just be a place where friends catch up with each other. However, it has grown to become a world-wide network of frequent and dynamic interactions. It is a place where social theories can be tested due to the diversity of the backgrounds of the users. The social data collected by Facebook is valuable both in generating more personalized services and in understanding more about the users themselves (see for example Facebook’s project on gross national happiness.
+
+Recently, Facebook published a paper in the 19th International World Wide Web Conference with the title Find Me If You Can: Improving Geographical Prediction with Social and Spatial Proximity (Backstrom et al., 2010). The paper offers interesting insights into the relationship between geographical distance and friendship of users. Let’s take a look at its content in this blog post.
+
+Location, Population and Friendship
+As the title of the paper suggests, it is about predicting a user’s location based on information about them available in Facebook. The application of such a technique is quite broad. It can be used to detect abnormal usage, to improve user experience, or to optimize the presentation of advertisements. In addition, the study also gives insight into the relationship between social ties and geographic distance: Do users have more friends who are located close to them and fewer friends who are living further away? Or is it true that the Internet has removed the limitations of physical distance?
+
+Facebook Data
+The authors report that 6% of the 100 million Facebook users in the US have put their home addresses in their profiles. Out of these addresses, 60% can be converted into geo-locations (latitude and longitude). As a result, the study makes use of a dataset that contains about 3.5 million user profiles with precisely known home addresses.
+
+Among these 3.5 million users, 2.9 million of them have at least one friend with a valid address. On average, these users have about 10 friends with valid addresses. If we consider the social network of these users, there are about 30.6 million relations between users with precisely known locations (representing the social network as a graph would result in a graph with 2.9 million vertices/nodes and 30.6 million edges). It is a huge data set and, as the authors have noted, it features much more precise location information compared to previous studies which usually only deduce location information from IP addresses.
+
+Population Density
+One interesting thing revealed in the paper is the distribution of population across the country. The authors divide the population of the US into three groups of roughly the same size according to the population density of their locations, and then plot the average number of people living x miles away against the distance from these locations. The graph shows nicely the changes in population distribution as one moves away from a certain location. For densely populated areas, for instance, the number of people increases with the distance in the beginning as one considers a larger area within a large city, but it decreases as soon as one moves to the suburban areas outside the city. The lines of the three groups join each other at a point when the distance is far enough that the average population density of the country is reflected.
+
+
+Relationship between population and distance for areas with different population densities. The three lines join each other at a point where the average population density is reflected (source: Backstrom, Sun, Marlow).
+Of course, this result seems to be quite obvious and intuitive. But still it is interesting that data from a social networking site can be used to show such a characteristic of population density.
+
+Friendship and Distance
+The second aspect the paper investigates is the probability of friendship as a function of geographical distance. Firstly, the distance between each pair of friends is calculated. Secondly, the probability of friendship at a certain distance is obtained by calculating the ratio between the number of pairs of friends and the total number of pairs of users at that distance. The authors observed that probability of friendship is inversely proportional to distance at medium to long-range distances. In other words, you are less likely to have friends which live further away. However, at shorter distances friendship is less sensitive to the effect of distance. Imagine an apartment building with multiple families — just living there wouldn’t necessarily imply being friends with everyone.
+
+
+Probability distribution of friendship over distance. It shows that probability of friendship is inversely proportional to distance in the medium and long range distances (source: Backstrom, Sun, Marlow).
+What is more interesting is that when the authors break down the users into different groups according to the population density of the areas in which they live, they find out that the probability distribution of friendship is different for different groups of users. For users living in low density areas, they are more likely to have friends within a short distance — seems like people in rural areas ‘stick together’. On the other hand, users living in high density areas are slightly more likely to have friends living far away. The authors suggest that this may be because that ‘people living in metropolitan areas are more cosmopolitan’.
+
+
+Probability of friendship for users in areas of different population densities. People living in high density areas are more likely to have long-distance friends (source: Backstrom, Sun, Marlow).
+Location Prediction
+The second part of the paper focuses on the problem of predicting the location of a user. Here, the question is: can we predict the location of a user if we know the locations of some or all of his friends? One could simply assume that a user would most likely be located close to his friends, and thus predict the user’s location using, for example, the mean or median of his friends’ locations. However, since geographically there are places where no people live, such simple approaches may produce strange — and funny — results when a user has friends from different places in the US. Imagine having two friends, one on Hawaii and one in Los Angeles — now calculate the mean of these two locations and you might end up in the middle of the Pacific Ocean…
+
+
+Sometimes 'keeping it simple, stupid' will not work that well.
+In fact, given the probability distribution mentioned above, one can also consider a maximum likelihood estimator of the location of a user. For example, we can calculate the probability that a user’s location is at point u by multiplying the probability of friendship given the distance between location u and the location of the user’s friends. However, for a large social network and a huge geographical area, such an approach would be very computationally expensive.
+
+The solution to this problem suggested by the author is to assume that a user would always co-locate with one of his/her friends. In this way the number of points that have to be evaluated becomes much smaller (i.e. the search space becomes much smaller). The paper presents some experiments and shows that this method of predicting the location of a user — while still being only a rough estimation — is more accurate than the current ‘standard’ of using the IP addresses of the users for deducing location information.
+
+Summary
+The paper of Backstrom, Sun and Marlow describes the analysis of Facebook data and the technique of location prediction in more detail. I think this paper is interesting because it shows how the large volume of user data collected from online social networking sites can be used to study different kinds of social issues. With this kind of research, we can expect computer science to play a more important role in the study of social issues and in the validation of different social theories.
+
+The paper shows that people are still rather bounded by physical distance. It is still more likely that people have friends who are physically located close to themselves, even though the Internet has provided different channels for users to make friends with someone living far away.
+
+In fact, some other studies have also arrived in similar conclusions. For example, a group of researchers from Northwestern University have studied user logs from a popular massively multi-player online game (MMOG), EverQuest II (Huang et al. 2009). The researchers found that although players can meet other players from all over the world in the game, and that homophily (similarity in certain characteristics) has certain influence on user behaviour, players are still more likely to interact with others who are geographically close to themselves, especially when the interaction involves partnership and collaboration in the game.
+
+Frances Cairncross first wrote about the ‘death of distance‘ more than a decade ago. However, even now when people can connect to the Internet wherever they want, geographical proximity still seems to play an important role in determining with whom people interact with. Is this a barrier that even the Internet and the World Wide Web are not able to remove? Or is that there is still relatively little benefits for people to interact with someone far away? These would be interesting questions for both computer scientists and social scientists in the future
